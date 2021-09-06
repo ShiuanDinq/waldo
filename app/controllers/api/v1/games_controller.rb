@@ -2,9 +2,9 @@ class Api::V1::GamesController < ApplicationController
   before_action :set_game, only: [:show, :destroy]
 
   def index
-    # games = Game.find(1)
+    games = Game.all
 
-    # render json: games
+    render json: games
 
   end
 
@@ -14,7 +14,8 @@ class Api::V1::GamesController < ApplicationController
 
   def show
     if @game
-      render json: @game
+      render json: @game.to_json(include: :characters)
+      # render json: appointment.to_json(include: [:doctor, :patient])
     else
       render json: @game.errors
     end

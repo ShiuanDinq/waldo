@@ -1,10 +1,12 @@
 import React from "react"
 
 const Character = (props) => {
-  var left = (props.pic.width/props.character.coord[0])+props.pic.left
-  var right = (props.pic.width/props.character.coord[1])+props.pic.left
-  var top = (props.pic.height/props.character.coord[2])+props.pic.top
-  var bottom = (props.pic.height/props.character.coord[3])+props.pic.top
+
+  var array = props.character.coords
+  var left = (props.pic.width/array[0])+props.pic.left
+  var right = (props.pic.width/array[1])+props.pic.left
+  var top = (props.pic.height/array[2])+props.pic.top
+  var bottom = (props.pic.height/array[3])+props.pic.top
 
 
   // const sides = {
@@ -16,7 +18,7 @@ const Character = (props) => {
   // }
   return(
     <div className={`char ${props.character.status? "active": ""}`} style={{left:left, top:top, width:(right-left), height:(bottom-top)}}>{props.height}</div>
- 
+
   )
 }
 

@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'games/index'
-      post 'games/create'
-      get 'games/show/:id', to: "games#show"
-      delete '/destroy/:id', to: "games#destroy"
+      resources :games, only: [:index, :show] do
+        resources :players, only: [:index, :create]
+      end
     end
   end
   root 'homepage#index'
