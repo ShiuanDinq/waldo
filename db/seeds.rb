@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
   Character.delete_all
   Game.delete_all
-  games = Game.create([{name: 'Map_1', image_url: '/waldo_1.png'}, {name: 'Map_2', image_url: '/waldo_2.png'}, {name: 'Map_3', image_url: '/waldo_3.png'}])
-  characters = Character.create([{name:'wald1', coords: '2.45, 2.3, 27.8, 7.65', game_id: games[0].id, image_url: '/char1.png'}, {name:'wald2', coords: '5.8, 5.147, 2.781, 2.243', game_id: games[0].id, image_url: '/char2.png'}, {name:'wald3', coords: '2.619, 2.427, 2.330, 1.978', game_id: games[0].id, image_url: '/char3.png'} ])
+  games = Game.create([{name: 'Department store', image_url: '/waldo_1.png'}, {name: 'Forest', image_url: '/waldo_2.png'}, {name: 'Town', image_url: '/waldo_3.png'}])
+  characters = Character.create([{name:'coat lady', coords: '41.3, 43.6, 4.9, 11.7', game_id: games[0].id, image_url: '/char1.png'}, {name:'iron lady', coords: '17.2, 19, 36.7, 45.1', game_id: games[0].id, image_url: '/char2.png'}, {name:'dancing man', coords: '38.5, 40.1, 43.8, 49.5', game_id: games[0].id, image_url: '/char3.png'} ])

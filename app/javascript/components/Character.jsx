@@ -2,11 +2,11 @@ import React from "react"
 
 const Character = (props) => {
 
-  var array = props.character.coords
-  var left = (props.pic.width/array[0])+props.pic.left
-  var right = (props.pic.width/array[1])+props.pic.left
-  var top = (props.pic.height/array[2])+props.pic.top
-  var bottom = (props.pic.height/array[3])+props.pic.top
+  var pcoord = props.translateCoord(props.character.coords)
+  var left = pcoord[0]
+  var right = pcoord[1]
+  var top = pcoord[2]
+  var bottom = pcoord[3]
 
 
   // const sides = {

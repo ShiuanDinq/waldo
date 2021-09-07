@@ -9,7 +9,7 @@ import { useParams, useHistory} from "react-router-dom";
 
 const Game = () => {
   const [coords, setCoords] = useState([])
-  const [pic, setPic] = useState([])
+  const [pic, setPic] = useState({})
   const [characters, setCharacters] = useState(null)
   const [selected, setSelected] = useState('')
   const [target, setTarget] = useState('')
@@ -21,6 +21,8 @@ const Game = () => {
   const [display, setDisplay] = useState('')
   const [name, setName] = useState('')
   const [start, setStart] = useState('')
+  const [scrollX, setScrollX] = useState('')
+  const [scrollY, setScrollY] = useState('')
   let history = useHistory();
 
 
@@ -78,17 +80,58 @@ const handleStart = () => {
   })
 
 //Set coordinates of clicks-------------------------------------------------------------------
-const handleCoords = (click) => {
-  setCoords([click.pageX, click.pageY])
-  // console.log('setting coord')
-  setPic(click.target.getBoundingClientRect())
+const handleCoords = (event) => {
+  const elem = event.target
+  const coord_x = 
+    (((event.pageX - elem.offsetLeft) / elem.width) * 10000) / 100
+  ;
+  const coord_y = 
+    (((event.pageY - elem.offsetTop) / elem.height) * 10000) / 100
+  ;
+
+  const reverse_x = (coord_x*100/10000*elem.width)+elem.offsetLeft
+  // console.log(elem.offsetLeft)
+  // console.log(elem.offsetTop)
+  // console.log(elem.width)
+  console.log(event.pageX)
+  console.log(event.pageY)
+  console.log(coord_x)
+  console.log(coord_y)
+  console.log(reverse_x)
+  // console.log(pic)
+  setCoords([coord_x, coord_y])
+  setPic({left:elem.offsetLeft, top:elem.offsetTop, width:elem.width, height:elem.height})
 
 }
+
+const translateCoord = (coords) => {
+  let newCoord = []
+  newCoord.push((coords[0]*100/10000*pic.width)+pic.left)
+  newCoord.push((coords[1]*100/10000*pic.width)+pic.left)
+  newCoord.push((coords[2]*100/10000*pic.height)+pic.top)
+  newCoord.push((coords[3]*100/10000*pic.height)+pic.top)
+  return(newCoord)
+}
+
+// const getClickCoords = (event) => {
+//   const elem = event.target;
+//   const coord_x = Math.floor(
+//     (((event.pageX - elem.offsetLeft) / elem.width) * 10000) / 100
+//   );
+//   const coord_y = Math.floor(
+//     (((event.pageY - elem.offsetTop) / elem.width) * 10000) / 100
+//   );
+//   targetBox.current.style.display = "block";
+//   targetBox.current.style.left = event.pageX + "px";
+//   targetBox.current.style.top = event.pageY + "px";
+//   setCoord({ x: coord_x, y: coord_y });
+// };
 
 //Check if target character is selected
 
   useEffect(() => {
     if(start){
+      console.log(coords)
       showDialog()
       handleTarget()
     }
@@ -107,21 +150,39 @@ const handleCoords = (click) => {
     hideDialog()
   }
 
-  const targetPresent = (character) => {
-    var character_left = (pic.width/character.coords[0])+pic.left
-    var character_right = (pic.width/character.coords[1])+pic.left
-    var character_top = (pic.height/character.coords[2])+pic.top
-    var character_bottom = (pic.height/character.coords[3])+pic.top
+//   const targetPresent = (character) => {
+//     var character_left = (pic.width/character.coords[0])+pic.left
+//     var character_right = (pic.width/character.coords[1])+pic.left
+//     var character_top = (pic.height/character.coords[2])+pic.top
+//     var character_bottom = (pic.height/character.coords[3])+pic.top
 
-   if(
-     coords[0] > character_left &&
-     coords[0] < character_right &&
-     coords[1] > character_top &&
-     coords[1] < character_bottom
-   ){
-     setTarget(character)
-   }
+//    if(
+//      coords[0] > character_left &&
+//      coords[0] < character_right &&
+//      coords[1] > character_top &&
+//      coords[1] < character_bottom
+//    ){
+//      setTarget(character)
+//    }
+//  }
+
+ const targetPresent = (character) => {
+  var character_left = character.coords[0]
+  var character_right = character.coords[1]
+  var character_top = character.coords[2]
+  var character_bottom = character.coords[3]
+  console.log(character)
+
+ if(
+   coords[0] > character_left &&
+   coords[0] < character_right &&
+   coords[1] > character_top &&
+   coords[1] < character_bottom
+ ){
+   console.log('yes')
+   setTarget(character)
  }
+}
 
   useEffect(() => {
     handleStatus()
@@ -134,6 +195,7 @@ const handleCoords = (click) => {
  // Set character status
  const handleStatus = () => {
   if(target.name == selected){
+    console.log(target.name)
     setCharacters((prevState) => {  
       const newChar = prevState.map((char) => {
         if(char.name == selected){
@@ -216,6 +278,7 @@ const sendWinner = async (e) => {
 
   useEffect(() => {
     handleWin()
+    console.log(characters)
   },[characters]) 
 
   const handleName = (e) => {
@@ -225,21 +288,8 @@ const sendWinner = async (e) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   if(characters){
-    var drawTarget = characters.map((character) => <Character pic={pic} character={character} />)
+    var drawTarget = characters.map((character) => <Character pic={pic} character={character} translateCoord={translateCoord}/>)
     var targetBox = characters.map(
       (character) => 
       <div className="target-box" >
@@ -259,11 +309,11 @@ const sendWinner = async (e) => {
         </p>
       </button>
       <ScoreForm win={win} name={name} handleName={handleName} sendWinner={sendWinner} />
-      <div className="column is-11 is-marginless is-paddingless">
-        <img id="pic" className="pic" src={image} onClick={handleCoords} style={{minWidth:"100%"}}/>
+      <div className="column is-marginless is-paddingless">
+        <img id="pic" className="pic" src={image} onClick={(event)=>handleCoords(event)} style={{height: "100%", width: "100%"}}/>
       </div>
-      <div className="column is-1 has-background-primary is-marginless is-paddingless">
-        <div className="sidebar" >
+
+        <div className="footer is-marginless is-paddingless" >
           <h1 className="is-size-4">
             Targets
           </h1>
@@ -280,12 +330,12 @@ const sendWinner = async (e) => {
           </div>
         </div>
 
-        <Dialog dialog={dialog} hideDialog={hideDialog} handleSelected={handleSelected} coords={coords} characters={characters}/>
-        <Target start={start} coords={coords} characters={characters} pic={pic} />
+        <Dialog dialog={dialog} hideDialog={hideDialog} handleSelected={handleSelected} coords={coords} pic={pic} characters={characters}/>
+        <Target start={start} coords={coords} characters={characters} pic={pic}/>
 
 
         {drawTarget}
-      </div>
+
     </div>
   )
 }
