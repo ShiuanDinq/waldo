@@ -19,11 +19,12 @@
 
 .char {
   display: none;
-  border-width: 1rem;
-  border: 5px solid rgb(5, 224, 89);
-  background-color: transparent;
+  // border-width: 1rem;
+  // border: 5px solid rgb(5, 224, 89);
+  // background-color: transparent;
   position: absolute;
-  opacity: 1;
+  width: 2rem;
+  // opacity: 1;
   z-index: 1;
 }
 

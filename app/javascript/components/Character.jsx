@@ -17,7 +17,7 @@ const Character = (props) => {
   //   height: top - bottom,
   // }
   return(
-    <div className={`char ${props.character.status? "active": ""}`} style={{left:left, top:top, width:(right-left), height:(bottom-top)}}>{props.height}</div>
+    <div className={`char ${props.character.status? "active": ""}`} style={{left:left, top:top}}><img src="/checkmark.png" /></div>
 
   )
 }

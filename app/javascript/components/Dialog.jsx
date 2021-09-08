@@ -12,7 +12,7 @@ const Dialog = (props) => {
   
   return (
 
-    <div className={`dialog level is-one ${props.dialog? "active": ""}`} style={{position:"absolute", left:(props.coords[0]*100/10000*props.pic.width)+props.pic.left, top:(props.coords[1]*100/10000*props.pic.height)+props.pic.top, zIndex:2}}>
+    <div className={`dialog level is-one ${props.dialog? "active": ""}`} style={{position:"absolute", left:props.coords[0], top:props.coords[1], zIndex:2}}>
       <div className="level-left">
         <div className="level-items is-one-third has-background-danger" style={{alignSelf:"flex-start" , opacity:0.7}} onClick={props.hideDialog}><p className="has-text-weight-bold" style={{margin:"0.2rem 0.5rem"}}>x</p></div>
         <div className="card level-items is-two-third">

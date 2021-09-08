@@ -8,4 +8,12 @@
   Character.delete_all
   Game.delete_all
   games = Game.create([{name: 'Department store', image_url: '/waldo_1.png'}, {name: 'Forest', image_url: '/waldo_2.png'}, {name: 'Town', image_url: '/waldo_3.png'}])
-  characters = Character.create([{name:'coat lady', coords: '41.3, 43.6, 4.9, 11.7', game_id: games[0].id, image_url: '/char1.png'}, {name:'iron lady', coords: '17.2, 19, 36.7, 45.1', game_id: games[0].id, image_url: '/char2.png'}, {name:'dancing man', coords: '38.5, 40.1, 43.8, 49.5', game_id: games[0].id, image_url: '/char3.png'} ])
+  characters = Character.create([
+    {name:'waldo', coords: '41.1, 42.7, 16.9, 20.7', game_id: games[0].id, image_url: '/waldo.png'}, 
+    {name:'wenda', coords: '29.1, 30.9, 72.4, 76.9', game_id: games[0].id, image_url: '/wenda.jpeg'}, 
+    {name:'odlaw', coords: '19.0, 20.7, 71.3, 75.0', game_id: games[0].id, image_url: '/odlaw.jpeg'}, 
+    {name:'white beard', coords: '67.9, 69.5, 3.1, 6.4', game_id: games[0].id, image_url: '/whitebeard.jpeg'},
+    {name:'waldo', coords: '41.8, 44.1, 73.2, 80.5', game_id: games[2].id, image_url: '/waldo.png'}, 
+    {name:'wenda', coords: '42.8, 44.2, 58.9, 62.1', game_id: games[2].id, image_url: '/wenda.jpeg'}, 
+    {name:'white beard', coords: '64.9, 66.1, 76.8, 79.1', game_id: games[2].id, image_url: '/whitebeard.jpeg'},
+  ])

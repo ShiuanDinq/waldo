@@ -89,17 +89,17 @@ const handleCoords = (event) => {
     (((event.pageY - elem.offsetTop) / elem.height) * 10000) / 100
   ;
 
-  const reverse_x = (coord_x*100/10000*elem.width)+elem.offsetLeft
+  // const reverse_x = (coord_x*100/10000*elem.width)+elem.offsetLeft
   // console.log(elem.offsetLeft)
   // console.log(elem.offsetTop)
   // console.log(elem.width)
-  console.log(event.pageX)
-  console.log(event.pageY)
+  // console.log(event.pageX)
+  // console.log(event.pageY)
   console.log(coord_x)
   console.log(coord_y)
-  console.log(reverse_x)
+  // console.log(reverse_x)
   // console.log(pic)
-  setCoords([coord_x, coord_y])
+  setCoords([event.pageX, event.pageY])
   setPic({left:elem.offsetLeft, top:elem.offsetTop, width:elem.width, height:elem.height})
 
 }
@@ -113,21 +113,7 @@ const translateCoord = (coords) => {
   return(newCoord)
 }
 
-// const getClickCoords = (event) => {
-//   const elem = event.target;
-//   const coord_x = Math.floor(
-//     (((event.pageX - elem.offsetLeft) / elem.width) * 10000) / 100
-//   );
-//   const coord_y = Math.floor(
-//     (((event.pageY - elem.offsetTop) / elem.width) * 10000) / 100
-//   );
-//   targetBox.current.style.display = "block";
-//   targetBox.current.style.left = event.pageX + "px";
-//   targetBox.current.style.top = event.pageY + "px";
-//   setCoord({ x: coord_x, y: coord_y });
-// };
 
-//Check if target character is selected
 
   useEffect(() => {
     if(start){
@@ -150,27 +136,13 @@ const translateCoord = (coords) => {
     hideDialog()
   }
 
-//   const targetPresent = (character) => {
-//     var character_left = (pic.width/character.coords[0])+pic.left
-//     var character_right = (pic.width/character.coords[1])+pic.left
-//     var character_top = (pic.height/character.coords[2])+pic.top
-//     var character_bottom = (pic.height/character.coords[3])+pic.top
-
-//    if(
-//      coords[0] > character_left &&
-//      coords[0] < character_right &&
-//      coords[1] > character_top &&
-//      coords[1] < character_bottom
-//    ){
-//      setTarget(character)
-//    }
-//  }
 
  const targetPresent = (character) => {
-  var character_left = character.coords[0]
-  var character_right = character.coords[1]
-  var character_top = character.coords[2]
-  var character_bottom = character.coords[3]
+  var pcoord =  translateCoord(character.coords)
+  var character_left = pcoord[0]
+  var character_right = pcoord[1]
+  var character_top = pcoord[2]
+  var character_bottom = pcoord[3]
   console.log(character)
 
  if(
@@ -330,8 +302,8 @@ const sendWinner = async (e) => {
           </div>
         </div>
 
-        <Dialog dialog={dialog} hideDialog={hideDialog} handleSelected={handleSelected} coords={coords} pic={pic} characters={characters}/>
-        <Target start={start} coords={coords} characters={characters} pic={pic}/>
+        <Dialog dialog={dialog} hideDialog={hideDialog} handleSelected={handleSelected} coords={coords} characters={characters}/>
+        <Target start={start} coords={coords} characters={characters} />
 
 
         {drawTarget}
