@@ -113,7 +113,7 @@
 .part-container {
   width: 15vw;
   height: 15vh;
-  position: absolute;
+  position: fixed;
   margin:auto;
   top: calc(85vh);
   left: calc(85vw);
@@ -124,7 +124,6 @@
 
 .part-container.active {
   animation: slideToRight 2s forwards ease-in-out;
-  // display: none;
 }
 
 @keyframes slideToRight {
@@ -428,15 +427,4 @@
 
 // }
 
-@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
-  html {
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    height: 100vw;
-    overflow-x: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-}
+

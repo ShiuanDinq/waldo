@@ -268,7 +268,7 @@ const Game = () => {
         <RestartForm lose={lose} restart={restart} highscore={formatTimer(highscore)}/>
         <ScoreForm win={win} name={name} handleName={handleName} sendWinner={sendWinner}/>
         <div className="column is-marginless is-paddingless">
-          <img id="pic" className="pic" src={image} onClick={(event)=>handleCoords(event)} style={{height: "100%", width: "100%"}}/>
+          <img id="pic" className="pic" src={image} onClick={(event)=>handleCoords(event)} style={{ minHeight: "100%", maxHeight:"100%", minWidth:"100%", maxWidth: "100%"}}/>
         </div>
 
         <div className="footer is-marginless is-paddingless" >
