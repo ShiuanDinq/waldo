@@ -14,8 +14,7 @@ class Api::V1::GamesController < ApplicationController
 
   def show
     if @game
-      render json: @game.to_json(include: :characters)
-      # render json: appointment.to_json(include: [:doctor, :patient])
+      render json: @game.to_json(include: [:characters, :players])
     else
       render json: @game.errors
     end

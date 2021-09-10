@@ -16,4 +16,7 @@
     {name:'waldo', coords: '41.8, 44.1, 73.2, 80.5', game_id: games[2].id, image_url: '/waldo.png'}, 
     {name:'wenda', coords: '42.8, 44.2, 58.9, 62.1', game_id: games[2].id, image_url: '/wenda.jpeg'}, 
     {name:'white beard', coords: '64.9, 66.1, 76.8, 79.1', game_id: games[2].id, image_url: '/whitebeard.jpeg'},
+    {name:'wenda', coords: '9.2, 10.7, 78.7, 81.6', game_id: games[1].id, image_url: '/wenda.jpeg'}, 
+    {name:'odlaw', coords: '59.0, 59.8, 24.0, 26.0', game_id: games[1].id, image_url: '/odlaw.jpeg'}, 
+    {name:'white beard', coords: '40.3, 41.4, 57.0, 59.5', game_id: games[1].id, image_url: '/whitebeard.jpeg'},
   ])

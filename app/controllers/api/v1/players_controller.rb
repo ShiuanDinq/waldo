@@ -4,7 +4,7 @@ class Api::V1::PlayersController < ApplicationController
   end
 
   def index
-    players = Player.where("game_id=?", params[:game_id])
+    players = Player.order("score ASC").where("game_id=?", params[:game_id]).first(10)
     render json: players
   end
 
